@@ -202,4 +202,8 @@ cleanDF = function(df) {
   #         PS = "BPIF",
   #         Company = "Khorolskii Mk",
   #         Volume = Volume*0.35/0.32)]
+  
+  df[SKU == "Semper_Lemolac_650Gr_0-6_N/S_Foods_Wet Food_Specials_Anti Reflux_Hero Ag",
+     `:=`(PS0 = "IMF", PS2 = "IF")]
+  
 }

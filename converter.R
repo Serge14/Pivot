@@ -13,7 +13,7 @@ source("/home/sergiy/Documents/Work/Nutricia/Scripts/Pivot/add_CDC_EC_AC.R")
 
 
 # Read raw data and join
-df = fread("BF_Y19M03.csv")
+df = fread("BF_Y19M04.csv")
 
 # Verification
 str(df)
