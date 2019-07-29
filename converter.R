@@ -11,9 +11,8 @@ source("/home/sergiy/Documents/Work/Nutricia/Scripts/Pivot/cleanDF.R")
 source("/home/sergiy/Documents/Work/Nutricia/Scripts/Pivot/addSegments.R")
 source("/home/sergiy/Documents/Work/Nutricia/Scripts/Pivot/add_CDC_EC_AC.R")
 
-
 # Read raw data and join
-df = fread("BF_Y19M04.csv")
+df = fread("BF_Y2019M06.csv")
 
 # Verification
 str(df)
@@ -26,7 +25,7 @@ df[, df[Brand == "", sum(Value)]*100/sum(Value), by = Ynb]
 df[Brand == "", .(Ynb, Comments), by = SKU] # coders should check empty cells
 
 # select data to work with
-df = df[Brand != "" & Value > 0 & Volume > 0]
+df = df[Brand != "" & (Value + Volume) > 0]
 
 # Clean the dataset, Pharmacy is deleted
 df = cleanDF(df)
@@ -70,6 +69,7 @@ df[(Scent2 == "" | is.na(Scent2)) &
    .N, by = .(Scent, PS3)]
 
 df1 = fread("df.csv")
+df1[, .N, by = .(Ynb, Mnb)]
 df = rbindlist(list(df1, df), use.names = TRUE)
 
 fwrite(df, "df.csv", row.names = FALSE) # Working file
